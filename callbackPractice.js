@@ -23,9 +23,13 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+
+var first = function(names, cb) {
+  cb(names[0]);
+}
+
 first(names, function(firstName){
   console.log('The first name in names is ' + firstName);
   return firstName;
@@ -37,7 +41,9 @@ first(names, function(firstName){
 
   //Code Here
 
-
+var last = function(names, cb) {
+  cb(names[names.length - 1]);
+}
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -50,7 +56,9 @@ last(names, function(lastName){
 
   //Code Here
 
-
+var multiply = function(x, y, cb) {
+  cb(x * y);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -63,7 +71,9 @@ multiply(4, 3, function(answer){
 // If the name does not exist, invoke the callback with false as an argument.
 
   //Code Here 
-
+var contains = function(names, str, cb) {
+  cb(names.includes(str));
+}
 
 
 
@@ -81,17 +91,31 @@ contains(names, 'Colt', function(result){
 // Invoke the callback with the modified array as an argument.
 
   //Code Here
+  function uniq(arr, cb) {
 
-
+    var uniqArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (uniqArr.indexOf(arr[i]) === -1) {
+        uniqArr.push(arr[i]);
+      }
+    }
+    cb(uniqArr);
+  } 
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
 });
 
-
-// 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
+// 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's 
+//    index as arguments.
 
     //Code Here 
+
+    function each(arr, cb) {
+      for (var i = 0; i < arr.length; i++) {
+        cb(arr[i], i);
+      }
+    }
 
 
 
@@ -106,7 +130,13 @@ each(names, function(item, indice){
 
 // Code here
 
-
+function getUserById(arr, str, cb) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].id === str) {
+      cb(arr[i]);
+    }
+  }
+}
 
 var users = [
   {
